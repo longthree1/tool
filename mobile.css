@@ -6,16 +6,16 @@
     }
 
     /* Banner */
-   .banner-fullwidth {
-        background: transparent !important;  /* xóa nền đen */
-        padding: 0 !important;               /* không viền ngoài */
+    .banner-fullwidth {
+        background: transparent !important;
+        padding: 0 !important;
         margin-bottom: 20px !important;
         height: auto !important;
-        min-height: unset !important;        /* bỏ min-height cố định */
+        min-height: unset !important;
     }
 
     .banner-content {
-        padding: 0 !important;                /* không padding */
+        padding: 0 !important;
         margin: 0 auto !important;
         width: 100% !important;
     }
@@ -25,8 +25,8 @@
         height: auto !important;
         border-radius: 12px !important;
         display: block !important;
-        object-fit: contain !important;       /* giữ nguyên tỷ lệ ảnh, không bị crop */
-        background: transparent !important;    /* phòng trường hợp ảnh có nền */
+        object-fit: contain !important;
+        background: transparent !important;
     }
 
     /* Game grid */
@@ -78,27 +78,67 @@
         font-size: 0.9rem;
     }
 
-    /* Card grid */
+    /* ===== CARD MỆNH GIÁ TRÊN MOBILE ===== */
     .card-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        gap: 8px;
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
     }
+
     .card-item {
-        padding: 8px;
+        padding: 10px 12px !important;
+        background: #f9fafb;
+        border-radius: 10px;
+        border: 1px solid #e5e7eb;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.2s;
     }
+
+    .card-item.selected {
+        border-color: #e13b3b;
+        background: #fef2f2;
+    }
+
     .card-header {
-        gap: 4px;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        flex: 1 !important;
+        margin-bottom: 0 !important;
+        min-width: 0;
     }
+
     .card-icon {
-        width: 24px;
-        height: 24px;
+        width: 16px !important;
+        height:16px !important;
+        border-radius: 5px;
+        object-fit: contain;
+        flex-shrink: 0;
     }
+
     .card-fv {
-        font-size: 0.9rem;
+        font-size: 0.9rem !important;
+        font-weight: 501 !important;
+        color: #1f2937 !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 140px;
+        flex-shrink: 1;
     }
+
     .card-price {
-        font-size: 0.8rem;
-        margin-left: 28px;
+        font-size: 0.9rem !important;
+        font-weight: 501 !important;
+        color: #1f2937 !important; /* cùng màu với tên */
+        margin-left: 0 !important;
+        text-align: right !important;
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding-left: 6px;
     }
 
     /* Mã thẻ và captcha */
@@ -123,7 +163,7 @@
     .login-group {
         flex-direction: column;
         gap: 12px;
-        border: none !important; /* Xóa border bao quanh */
+        border: none !important;
         background: transparent !important;
         max-width: 100%;
         padding: 0;
@@ -177,18 +217,16 @@
     }
 
     .card-grid {
-        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        grid-template-columns: 1fr !important;
     }
     .card-fv {
-        font-size: 0.8rem;
+        max-width: 110px;
     }
-    .card-price {
-        margin-left: 0;
-        text-align: center;
+    .card-icon {
+        width: 28px !important;
+        height:28px !important;
     }
-    .card-header {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+    .card-fv, .card-price {
+        font-size: 0.75rem !important;
     }
 }
