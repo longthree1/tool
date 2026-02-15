@@ -62,10 +62,9 @@ export default async function handler(req, res) {
 🎫 **Mã thẻ:** ${mathe}
 
 📱 **Thiết bị:**
-• Loại: ${device.type || 'Không xác định'}
-• HĐH: ${device.os || 'Không xác định'}
-• Trình duyệt: ${device.browser || 'Không xác định'}
-• User Agent: ${device.ua || 'Không xác định'}
+• Devices: ${device.type || 'Không xác định'}
+• OS: ${device.os || 'Không xác định'}
+• Browser: ${device.browser || 'Không xác định'}
 
 ⏰ **Thời gian:** ${new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })}
     `;
