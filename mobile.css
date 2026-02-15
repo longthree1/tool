@@ -1,0 +1,165 @@
+/* Responsive cho mobile */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 12px;
+    }
+
+    /* Banner */
+    .banner-fullwidth {
+        height: auto;
+        min-height: 150px;
+        margin-bottom: 24px;
+    }
+    .banner-content {
+        padding: 10px;
+    }
+    .banner-content img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 12px;
+    }
+
+    /* Game grid */
+    .game-grid {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: 12px;
+        margin-bottom: 32px;
+    }
+    .game-icon {
+        width: 80px;
+        height: 80px;
+        border-width: 3px;
+    }
+    .game-name {
+        font-size: 0.8rem;
+    }
+
+    /* Form nạp thẻ */
+    .card-form-section {
+        padding: 20px;
+    }
+    .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 16px;
+    }
+
+    /* Step header */
+    .step-badge {
+        width: 36px;
+        height: 36px;
+    }
+    .step-number {
+        font-size: 1.1rem;
+    }
+    .step-header .step-title {
+        font-size: 1.1rem;
+    }
+
+    /* Account info */
+    .account-info {
+        padding: 12px;
+        gap: 12px;
+    }
+    .account-avatar {
+        width: 40px;
+        height: 40px;
+    }
+    .account-id {
+        font-size: 0.9rem;
+    }
+
+    /* Card grid */
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 8px;
+    }
+    .card-item {
+        padding: 8px;
+    }
+    .card-header {
+        gap: 4px;
+    }
+    .card-icon {
+        width: 24px;
+        height: 24px;
+    }
+    .card-fv {
+        font-size: 0.9rem;
+    }
+    .card-price {
+        font-size: 0.8rem;
+        margin-left: 28px;
+    }
+
+    /* Mã thẻ và captcha */
+    .card-code-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    .card-code-input {
+        width: 100%;
+    }
+    .captcha-container {
+        align-self: center;
+    }
+    .btn-confirm {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    /* Bước 1 */
+    .login-group {
+        max-width: 100%;
+    }
+    .uid-input {
+        padding: 10px 12px;
+        font-size: 0.95rem;
+    }
+    .btn-login {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+    }
+
+    /* Footer */
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    .footer-links {
+        justify-content: center;
+    }
+}
+
+/* Thêm cho màn hình rất nhỏ (dưới 480px) */
+@media (max-width: 480px) {
+    .game-grid {
+        grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+        gap: 8px;
+    }
+    .game-icon {
+        width: 70px;
+        height: 70px;
+    }
+    .game-name {
+        font-size: 0.7rem;
+    }
+
+    .card-grid {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    }
+    .card-fv {
+        font-size: 0.8rem;
+    }
+    .card-price {
+        margin-left: 0;
+        text-align: center;
+    }
+    .card-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
