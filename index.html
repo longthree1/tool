@@ -14,7 +14,7 @@
             padding: 0;
             box-sizing: border-box;
         }
-        body {
+        body {            
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
             color: #1f2937;
@@ -41,13 +41,11 @@
         .header-left {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 10px;
         }
         .logo {
             width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            overflow: hidden;
+            height: 40px;         
             display: flex;
             align-items: center;
             justify-content: center;
@@ -59,16 +57,26 @@
             display: block;
         }
         .page-title {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: #374151;
+        }
+        .mobile-title {
+            display: none;
+        }
+
+        .separator {
+            width: 1px;
+            height: 24px; /* Chiều cao đường kẻ, điều chỉnh theo ý muốn */
+            background-color: #d1d5db; /* Màu xám nhạt */
+            margin: 0 0px; /* Khoảng cách hai bên */
         }
         .header-right {
             display: flex;
             align-items: center;
             gap: 20px;
         }
-        .support-link {
+        .download-link {
             color: #e13b3b;
             text-decoration: none;
             font-weight: 500;
@@ -495,18 +503,21 @@
                     <div class="logo">
                         <img src="https://logospng.org/download/garena/logo-escudo-garena-512.png" alt="Garena" onerror="this.style.display='none'; this.parentElement.style.background='#e13b3b';">
                     </div>
-                    <h1 class="page-title">Trung tâm nạp thẻ chính thức</h1>
+                    <div class="separator"></div> <!-- Đường kẻ ngăn cách -->
+                    <h1 class="page-title">
+                      <span class="desktop-title">Trung tâm nạp thẻ chính thức</span>
+                      <span class="mobile-title">Trung tâm nạp thẻ <br> chính thức</span>
+                    </h1>
                 </div>
                 <div class="header-right">
-                    <a href="https://hotro.garena.vn/" class="support-link" target="_blank">
-                        <i class="fas fa-headset"></i> Hỗ trợ
+                    <a href="https://hotro.garena.vn/" class="download-link" target="_blank">
+                        <i class="fas fa-download"></i> Tải App
                     </a>
                     <div class="avatar">
                         <svg width="40" height="40" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="40" cy="40" r="40" fill="#C8C8C8"></circle>
                             <circle cx="40" cy="25.6694" r="14" fill="white"></circle>
-                            <path d="M18.6624 60.6252C16.2799 58.0468 17.02 54.0297 20.0672 52.2863C25.9526 48.9192 32.7514 46.9976 39.9935 46.9976C47.2356 46.9976 54.0345 48.9192 59.9198 52.2863C62.967 54.0297 63.7072 58.0468 61.3246 60.6252C55.9949 66.3929 48.41 69.9976 39.9935 69.9976C31.5771 69.9976 23.9921 66.3929 18.6624 60.6252Z" fill="white"></path>
-                        </svg>
+                             <path d="M18.6624 60.6252C16.2799 58.0468 17.02 54.0297 20.0672 52.2863C25.9526 48.9192 32.7514 46.9976 39.9935 46.9976C47.2356 46.9976 54.0345 48.9192 59.9198 52.2863C62.967 54.0297 63.7072 58.0468 61.3246 60.6252C55.9949 66.3929 48.41 69.9976 39.9935 69.9976C31.5771 69.9976 23.9921 66.3929 18.6624 60.6252Z" fill="white"></path>
                     </div>
                 </div>
             </div>
@@ -597,15 +608,13 @@
             <div class="container">
                 <div class="footer-content">
                     <div class="footer-info">
-                        <p>CÔNG TY CỔ PHẦN SHOPEEPAY</p>
-                        <p>Giấy CNĐKKD số 0103959912, cấp lần đầu ngày 09/06/2009</p>
-                        <p>Địa chỉ: Tầng 29, Tòa nhà Trung tâm Lotte Hà Nội...</p>
+                        <p>NAPTHEVN.VERCEL.APP</p>                      
                     </div>
                     <div class="footer-links">
-                        <a href="https://napthe.vn/faq" target="_blank" rel="noopener noreferrer">Câu hỏi thường gặp</a>
-                        <a href="https://napthe.vn/terms" target="_blank" rel="noopener noreferrer">
+                        <a href="https://hotro.garena.vn" target="_blank" rel="noopener noreferrer">Trung tâm trợ giúp</a>
+                        <a href="terms.html" target="_blank" rel="noopener noreferrer">
 Điều khoản sử dụng</a>
-                        <a href="https://napthe.vn/privacy" target="_blank" rel="noopener noreferrer">
+                        <a href="privacy.html" target="_blank" rel="noopener noreferrer">
 Chính sách bảo mật</a>
                     </div>
                 </div>
